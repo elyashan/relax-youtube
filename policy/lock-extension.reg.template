@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+; Relax YouTube — Resmi Microsoft Edge Zorunlu Kilit Şablonu
+; Kullanım için <EXTENSION_ID_32_KARAKTER> alanını Microsoft Partner Center'dan
+; aldığınız 32 karakterlik (a-p) uzantı kimliği ile değiştirip .reg olarak kaydedin
+; ya da doğrudan policy\apply-lock.ps1 scriptini Yönetici olarak çalıştırın.
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"InPrivateModeAvailability"=dword:00000001
+"BrowserGuestModeEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist]
+"1"="<EXTENSION_ID_32_KARAKTER>;https://edge.microsoft.com/extensionwebstorebase/v1/crx"

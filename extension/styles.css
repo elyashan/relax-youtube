@@ -1,0 +1,272 @@
+/* Relax YouTube — Always-On Distraction Blocker (No Off Switch) */
+
+/* 1. Reset masthead & guide spacing so hiding top/left bars leaves zero dead whitespace */
+:root,
+html,
+body,
+ytd-app {
+  --ytd-masthead-height: 0px !important;
+  --ytd-toolbar-height: 0px !important;
+  --ytd-mini-guide-width: 0px !important;
+}
+
+ytd-page-manager#page-manager {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* 2. Hide Top Header Bar, Search Bar & Notifications */
+#masthead-container,
+ytd-masthead,
+#masthead,
+#search,
+#search-form,
+ytd-searchbox,
+yt-searchbox,
+#center.ytd-masthead,
+ytd-notification-topbar-button-renderer,
+#buttons.ytd-masthead,
+ytm-mobile-topbar-renderer,
+.mobile-topbar-header,
+ytm-pivot-bar-renderer {
+  display: none !important;
+}
+
+/* 3. Hide Left Navigation, Guide, Mini Guide & Discovery Pages (Explore, Trending, Subscriptions, Playables) */
+tp-yt-app-drawer#guide,
+ytd-guide-renderer,
+ytd-mini-guide-renderer,
+#guide-wrapper,
+#guide-button,
+ytd-browse[page-subtype="explore"],
+ytd-browse[page-subtype="trending"],
+ytd-browse[page-subtype="subscriptions"],
+ytd-browse[page-subtype="channels"],
+ytd-browse[page-subtype="playables"] {
+  display: none !important;
+}
+
+/* 4. Hide Home Page & Blocked App Views */
+ytd-browse[page-subtype="home"],
+ytd-two-column-browse-results-renderer[page-subtype="home"],
+ytm-browse[data-content-type="home"] {
+  display: none !important;
+}
+
+html[data-relax-yt-blocked="true"] ytd-app,
+html[data-relax-yt-blocked="true"] ytm-app {
+  display: none !important;
+}
+
+/* 5. Clean Mode — Show ONLY Video Player on Watch Pages & Center Layout */
+ytd-watch-flexy #secondary,
+ytd-watch-flexy #secondary-inner,
+ytd-watch-grid #secondary,
+ytd-watch-grid #secondary-inner,
+#secondary,
+#secondary-inner,
+#below,
+#meta,
+#info,
+ytd-watch-metadata,
+#ticket-shelf,
+#merch-shelf,
+ytd-merch-shelf-renderer,
+#donation-shelf,
+ytm-single-column-watch-next-results-renderer > :not(.player-container):not(#player-container-id) {
+  display: none !important;
+}
+
+ytd-watch-flexy:not([theater]):not([fullscreen]) #columns,
+ytd-watch-grid:not([theater]):not([fullscreen]) #columns {
+  display: flex !important;
+  justify-content: center !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+ytd-watch-flexy:not([theater]):not([fullscreen]) #primary,
+ytd-watch-grid:not([theater]):not([fullscreen]) #primary {
+  max-width: 1280px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  padding: 16px 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* 6. Hide Comments */
+#comments,
+ytd-comments,
+ytd-comments-header-renderer,
+ytm-comment-section-renderer,
+ytm-comments-entry-point-header-renderer,
+#comment-teaser {
+  display: none !important;
+}
+
+/* 7. Hide Related Videos & Player Pause/End Overlays */
+#related,
+ytd-watch-next-secondary-results-renderer,
+ytd-compact-video-renderer,
+ytd-compact-radio-renderer,
+ytd-compact-playlist-renderer,
+ytm-item-section-renderer[section-identifier="related-items"],
+.ytp-pause-overlay,
+.ytp-scroll-min,
+.ytp-suggestion-set {
+  display: none !important;
+}
+
+/* 8. Hide Shorts (Tab, Any Shorts Videos, Shorts from Related Videos) */
+ytd-shorts,
+ytd-reel-video-renderer,
+ytd-reel-shelf-renderer,
+ytd-rich-shelf-renderer[is-shorts],
+ytm-reel-shelf-renderer,
+ytm-shorts-lockup-view-model,
+ytd-guide-entry-renderer a[title="Shorts"],
+ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+yt-tab-shape[tab-title="Shorts"],
+a[href^="/shorts/"],
+ytd-rich-item-renderer:has(a[href*="/shorts/"]),
+ytd-video-renderer:has(a[href*="/shorts/"]),
+ytd-grid-video-renderer:has(a[href*="/shorts/"]),
+ytd-compact-video-renderer:has(a[href*="/shorts/"]),
+grid-shelf-view-model:has(a[href*="/shorts/"]),
+yt-lockup-view-model:has(a[href*="/shorts/"]) {
+  display: none !important;
+}
+
+/* 9. Disable Autoplay UI & Up-Next Countdown */
+.ytp-autonav-toggle-button-container,
+button[data-tooltip-target-id="ytp-autonav-toggle-button"],
+.ytm-autonav-toggle-button-container,
+.ytp-autonav-endscreen-upnext-container,
+.ytp-autonav-endscreen-countdown-overlay {
+  display: none !important;
+}
+
+/* 10. Hide "Subscribe" Button */
+#subscribe-button,
+ytd-subscribe-button-renderer,
+yt-subscribe-button-view-model,
+.ytp-sb-subscribe,
+ytm-subscribe-button-renderer {
+  display: none !important;
+}
+
+/* 11. Hide Likes */
+like-button-view-model,
+dislike-button-view-model,
+segmented-like-dislike-button-view-model,
+ytd-segmented-like-dislike-button-renderer,
+#top-level-buttons-computed,
+ytm-slim-video-action-bar-renderer {
+  display: none !important;
+}
+
+/* 12. Hide Live Chat */
+#chat,
+#chat-container,
+ytd-live-chat-frame,
+iframe#chatframe,
+ytm-live-chat-entry-point-renderer {
+  display: none !important;
+}
+
+/* 13. Hide Playables */
+a[href*="/playables"],
+ytd-mini-game-card-view-model,
+ytd-rich-shelf-renderer:has(a[href*="/playables"]),
+ytd-guide-entry-renderer:has(a[href*="/playables"]) {
+  display: none !important;
+}
+
+/* 14. Disable End Screen Cards */
+.ytp-ce-element,
+.ytp-ce-covering-overlay,
+.ytp-ce-element-shadow,
+.ytp-ce-covering-image,
+.ytp-ce-expanding-image,
+.ytp-ce-video,
+.ytp-ce-playlist,
+.ytp-ce-channel,
+.ytp-cards-teaser,
+.ytp-cards-button,
+.iv-branding,
+.ytp-endscreen-content,
+.html5-endscreen,
+.ytp-videowall-still,
+.ytp-suggested-action,
+.ytp-suggested-action-badge {
+  display: none !important;
+}
+
+/* 15. Hide Subscriptions */
+a[href="/feed/subscriptions"],
+ytd-guide-entry-renderer:has(a[href="/feed/subscriptions"]),
+ytd-mini-guide-entry-renderer:has(a[href="/feed/subscriptions"]) {
+  display: none !important;
+}
+
+/* 16. Focus Overlay for Blocked Feeds & Routes */
+#relax-yt-blocked-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #0b1120;
+  color: #e2e8f0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+#relax-yt-blocked-overlay .relax-yt-card {
+  max-width: 440px;
+  width: 100%;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: #111827;
+  border: 1px solid #1e293b;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+#relax-yt-blocked-overlay .relax-yt-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#relax-yt-blocked-overlay .relax-yt-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+#relax-yt-blocked-overlay .relax-yt-reason {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #93c5fd;
+}
+
+#relax-yt-blocked-overlay .relax-yt-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #94a3b8;
+}

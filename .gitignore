@@ -1,0 +1,6 @@
+dist/
+.DS_Store
+Thumbs.db
+*.crx
+*.pem
+node_modules/
