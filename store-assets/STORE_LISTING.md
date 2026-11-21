@@ -8,7 +8,7 @@ Bu dosya, **Relax YouTube** eklentisini Microsoft Partner Center üzerinden **ü
 
 - **Eklenti Paketi (`.zip`):** `dist/relax-youtube-store.zip`
 - **Mağaza Logosu (300x300 PNG):** `store-assets/logo-300x300.png`
-- **Gizlilik Politikası URL'si:** GitHub depona push yaptıktan sonra `https://github.com/<KULLANICI_ADIN>/relax-youtube/blob/main/PRIVACY.md`
+- **Gizlilik Politikası URL'si:** `https://github.com/elyashan/relax-youtube/blob/main/PRIVACY.md`
 
 ---
 

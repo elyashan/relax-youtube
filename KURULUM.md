@@ -24,12 +24,12 @@ Microsoft Partner Center mağaza başvurusunda bir **Privacy Policy URL** ister.
 1. GitHub'da oturum açıp yeni bir depo (örneğin `relax-youtube`, Public olması gerekir ki Microsoft inceleme ekibi `PRIVACY.md` linkini okuyabilsin) oluşturun. **README/License eklemeden** boş oluşturun.
 2. Bu klasörde terminal açıp kendi repo adresinizle push yapın:
    ```powershell
-   git remote add origin https://github.com/<KULLANICI_ADIN>/relax-youtube.git
+   git remote add origin https://github.com/elyashan/relax-youtube.git
    git push -u origin main
    ```
 3. Push sonrası tarayıcıdan şu linkin açıldığını kontrol edin:
    ```text
-   https://github.com/<KULLANICI_ADIN>/relax-youtube/blob/main/PRIVACY.md
+   https://github.com/elyashan/relax-youtube/blob/main/PRIVACY.md
    ```
    Bu URL'yi mağaza formunda **Privacy policy URL** alanına yapıştıracaksınız.
 
