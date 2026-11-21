@@ -1,69 +1,98 @@
 # Relax YouTube
 
-Kapatma tuşu ve değiştirilebilir ayarı olmayan, daima aktif **Microsoft Edge (Manifest V3)** YouTube odaklanma eklentisi ve resmi Edge kurumsal zorunlu kilit araçları.
+An always-on **Microsoft Edge (Manifest V3)** extension for distraction-free YouTube watching, paired with official Edge enterprise policy scripts so it cannot be casually toggled off.
 
-> **English Summary:** Relax YouTube is an always-on Manifest V3 Microsoft Edge extension designed for distraction-free YouTube watching. It has no off-switch or user-editable settings page and is built to pair with official Windows Registry Edge policies (`ExtensionInstallForcelist`) so it cannot be casually disabled.
-
----
-
-## Sabit Özellikler (Kapatılamaz)
-
-- **Clean Mode:** İzleme sayfalarında (`/watch`) yalnızca video oynatıcıyı ortalanmış şekilde gösterir.
-- **Ana Sayfa Gizli & Kilitli:** `/` rotasında akışı gizler ve odak ekranı gösterir.
-- **Shorts Tamamen Engelli:** Shorts sekmesi, Shorts rafları, önerilenlerdeki Shorts videoları gizlenir ve `/shorts/*` sayfaları engellenir.
-- **Üst Çubuk, Arama & Bildirimler Gizli:** YouTube üst çubuğu, arama kutusu ve bildirim simgesi gizlenir; `/` arama kısayolu engellenir.
-- **Yorumlar & İlgili Videolar Gizli:** İzleme sayfasındaki tüm yan öneriler, yorumlar ve duraklatma önerileri kaldırılır.
-- **Keşfet, Trendler, Abonelikler & Playables Engelli:** Sol menü ve ilgili akış sayfaları kapatılır.
-- **Otomatik Oynatma (Autoplay) Kapalı:** Oynatıcıdaki autoplay anahtarı kapatılır ve sıradaki video sayacı iptal edilir.
-- **Abone Ol, Beğeniler, Canlı Sohbet & Bitiş Kartları Gizli:** Video sonu kartları ve dikkat dağıtıcı etkileşim butonları gizlenir.
-- **Sıfır Ayar & Sıfır Kapatma Tuşu:** Popup penceresi yalnızca aktif korumaları gösteren salt-okunur bir durum kartıdır.
-
-*(Siyah-Beyaz Modu, Küçük Resimleri Gizle ve Küçük Resimleri Bulanıklaştır özellikleri kapalıdır.)*
+> **No off-switch, no settings UI.** Every distraction filter is hardcoded and active at `document_start`. Designed to be published as a **Hidden** extension on the Microsoft Edge Add-ons Store and locked via Windows Registry (`ExtensionInstallForcelist`).
 
 ---
 
-## Proje Yapısı
+## Locked Always-On Features
+
+- **Clean Mode:** Displays only the centered video player on `/watch` pages.
+- **Home Page Blocked:** Hides and blocks the `/` home feed with a calm focus screen.
+- **Shorts Completely Blocked:** Hides the Shorts tab, Shorts shelves, and Shorts inside related videos, and blocks `/shorts/*` routes.
+- **Top Header, Search Bar & Notifications Hidden:** Hides the masthead, search box, notification icon, and blocks the `/` search keyboard shortcut.
+- **Comments & Related Videos Hidden:** Removes comments, right-hand/below recommendations, and pause/end overlays.
+- **Explore, Trending, Subscriptions & Playables Blocked:** Hides left navigation entries and blocks discovery/feed routes.
+- **Autoplay Permanently Disabled:** Automatically turns off autoplay toggles and cancels up-next countdowns.
+- **Subscribe, Likes, Live Chat & End Screen Cards Hidden:** Removes interaction clutter and end-screen cards.
+- **Read-Only Status Popup:** Clicking the toolbar icon shows active protections only—zero toggles, buttons, or scripts.
+
+*(Black & White Mode, Hide Thumbnails, and Blur Thumbnails remain disabled.)*
+
+---
+
+## Project Structure
 
 ```text
 relax-youtube/
-├── extension/              # Manifest V3 eklenti kaynak kodları
+├── extension/              # Manifest V3 extension source files
 │   ├── manifest.json
 │   ├── styles.css
 │   ├── content.js
 │   ├── popup.html
 │   ├── popup.css
 │   └── icons/
-├── policy/                 # Resmi Edge zorunlu kilit (HKLM Policy) araçları
+├── policy/                 # Official Edge forced-lock (HKLM Registry Policy) tools
 │   ├── apply-lock.ps1
 │   ├── verify-lock.ps1
 │   └── lock-extension.reg.template
 ├── scripts/
-│   ├── generate-icons.py   # Eklenti ve mağaza ikon üretici (Python stdlib)
-│   └── pack-for-store.ps1  # Edge Partner Center için zip paketleyici
+│   ├── generate-icons.py   # Icon & store logo generator (Python stdlib)
+│   └── pack-for-store.ps1  # Store package builder (dist/relax-youtube-store.zip)
 ├── store-assets/
 │   ├── logo-300x300.png
 │   └── STORE_LISTING.md
 ├── tests/
-│   └── validate.mjs        # Otomatik doğrulama ve birim testleri (Node.js)
-├── KURULUM.md              # Adım adım Türkçe kurulum ve kilit rehberi
-├── PRIVACY.md              # Gizlilik politikası (Partner Center URL için)
-└── LICENSE
+│   └── validate.mjs        # Automated validation & unit tests (Node.js)
+├── KURULUM.md              # Step-by-step Turkish setup & lock guide
+├── PRIVACY.md              # Zero-data-collection privacy policy
+└── LICENSE                 # MIT License
 ```
 
 ---
 
-## Hızlı Test & Doğrulama
+## Quick Local Test & Validation
 
-1. **Yerel deneme (kilitsiz test):**
-   - Edge'de `edge://extensions` adresini açın.
-   - **Geliştirici Modu**'nu açın → **Paketten çıkarılmışı yükle** → `extension/` klasörünü seçin.
-2. **Otomatik doğrulama testleri:**
+1. **Load unpacked in Microsoft Edge (for previewing without policy lock):**
+   - Open `edge://extensions`
+   - Enable **Developer mode**
+   - Click **Load unpacked** and select the `extension/` folder.
+2. **Run automated tests:**
    ```powershell
    node tests/validate.mjs
    ```
-3. **Mağaza `.zip` paketini yeniden oluşturma:**
+3. **Build the store submission `.zip` package:**
    ```powershell
    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/pack-for-store.ps1
    ```
 
-Tam **GitHub + Ücretsiz Hidden Edge Add-ons Store + Zorunlu Registry Kilidi** adımları için [KURULUM.md](KURULUM.md) dosyasına bakın.
+---
+
+## Hidden Store Publishing & Forced Policy Lock
+
+On non-domain-joined Windows machines, Microsoft Edge restricts `ExtensionInstallForcelist` policy locks to extensions hosted on the official Edge Add-ons Store.
+
+1. Submit `dist/relax-youtube-store.zip` (with `store-assets/logo-300x300.png` and details from [`store-assets/STORE_LISTING.md`](store-assets/STORE_LISTING.md)) to **Microsoft Partner Center** for free with **Visibility** set to **`Hidden`**.
+2. After approval, copy the 32-character Extension ID and run the official Registry policy script in an **Administrator PowerShell**:
+   ```powershell
+   .\policy\apply-lock.ps1 -ExtensionId "<32_CHAR_EXTENSION_ID>"
+   ```
+   *(By default this also disables InPrivate mode and Guest mode so the lock cannot be bypassed; pass `-KeepInPrivate` or `-KeepGuestMode` to keep either enabled.)*
+3. Restart Edge completely and verify under `edge://policy` and `edge://extensions`, or run `.\policy\verify-lock.ps1`.
+
+---
+
+## Privacy
+
+Relax YouTube collects **zero** personal data, stores nothing, and makes zero network requests. See [`PRIVACY.md`](PRIVACY.md).
+
+---
+
+## Türkçe Özet
+
+**Relax YouTube**, kapatma tuşu ve ayar menüsü olmayan, daima aktif bir Microsoft Edge (Manifest V3) YouTube odaklanma eklentisidir. Ana sayfa, Shorts, yorumlar, ilgili videolar, üst çubuk, arama kutusu, bildirimler, abonelikler, Keşfet/Trendler, Playables, Abone Ol/beğeniler, canlı sohbet ve video sonu kartlarını kalıcı olarak gizler; otomatik oynatmayı kapatır.
+
+- **Yerel test:** `edge://extensions` → Geliştirici Modu → Paketten çıkarılmışı yükle → `extension/` klasörünü seçin.
+- **Doğrulama:** `node tests/validate.mjs`
+- **Adım adım Türkçe kurulum, GitHub, Hidden Edge Add-ons Store yayını ve zorunlu kilit rehberi:** [`KURULUM.md`](KURULUM.md)
