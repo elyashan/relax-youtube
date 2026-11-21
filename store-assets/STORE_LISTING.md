@@ -20,10 +20,10 @@ Bu dosya, **Relax YouTube** eklentisini Microsoft Partner Center üzerinden **ü
 - **Primary Language:** `English` (veya Türkçe açıklamayla birlikte ikisi de kabul edilir; aşağıda ikisi de var)
 
 ### Short Description (EN — Mağaza İncelemesi İçin Önerilen)
-> Always-on distraction-free YouTube player. Permanently hides feeds, Shorts, comments, recommendations, search bar, and disables autoplay.
+> Always-on distraction-free YouTube player. Hides feeds, Shorts, comments, recommendations, search bar, and autoplay.
 
 ### Short Description (TR)
-> Daima açık, dikkat dağıtıcıları kalıcı olarak gizleyen YouTube oynatıcı. Ana sayfa, Shorts, yorumlar, öneriler ve aramayı kapatır.
+> Daima açık, dikkat dağıtıcıları gizleyen YouTube oynatıcı. Ana sayfa, Shorts, yorumlar, öneriler ve aramayı kapatır.
 
 ### Detailed Description (EN)
 ```text

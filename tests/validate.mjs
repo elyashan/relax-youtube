@@ -91,6 +91,9 @@ function findElementById(node, id) {
   const manifest = JSON.parse(readUtf8("extension/manifest.json"));
   assert.equal(manifest.manifest_version, 3, "manifest_version must be 3");
   assert.equal(manifest.name, "Relax YouTube");
+  assert.ok(manifest.name.length <= 45, "manifest.name must be <= 45 chars");
+  assert.ok(manifest.short_name.length <= 12, "manifest.short_name must be <= 12 chars");
+  assert.ok(manifest.description.length <= 132, "manifest.description must be <= 132 chars");
   assert.ok(manifest.version, "manifest version must exist");
   assert.ok(!manifest.permissions || manifest.permissions.length === 0, "No extra permissions allowed");
   assert.equal(manifest.options_page, undefined, "options_page must not exist");
