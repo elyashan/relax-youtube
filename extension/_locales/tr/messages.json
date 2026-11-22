@@ -1,0 +1,62 @@
+{
+  "actionTitle": {
+    "message": "Relax YouTube — Kilitli & Aktif"
+  },
+  "statusBadge": {
+    "message": "Kilitli & Aktif"
+  },
+  "sectionTitle": {
+    "message": "Sabit Korumalar"
+  },
+  "ruleCleanMode": {
+    "message": "Clean Mode (Yalnızca Video Oynatıcı)"
+  },
+  "ruleHome": {
+    "message": "Ana Sayfa Gizli & Engelli"
+  },
+  "ruleShorts": {
+    "message": "Shorts Sekmesi, Videolar & Öneriler Engelli"
+  },
+  "ruleComments": {
+    "message": "Yorumlar & İlgili Videolar Gizli"
+  },
+  "ruleDiscovery": {
+    "message": "Keşfet, Trendler & Abonelikler Gizli"
+  },
+  "ruleHeader": {
+    "message": "Üst Çubuk, Arama & Bildirimler Gizli"
+  },
+  "ruleAutoplay": {
+    "message": "Otomatik Oynatma (Autoplay) Kapalı"
+  },
+  "ruleClutter": {
+    "message": "Abone Ol, Beğeni, Canlı Sohbet, Playables & Bitiş Kartları Gizli"
+  },
+  "popupFooter": {
+    "message": "Kapatma tuşu ve ayar değiştirme devre dışıdır."
+  },
+  "blockedHome": {
+    "message": "Ana sayfa kilitli"
+  },
+  "blockedShorts": {
+    "message": "Shorts kilitli"
+  },
+  "blockedSubscriptions": {
+    "message": "Abonelikler kilitli"
+  },
+  "blockedDiscovery": {
+    "message": "Keşfet ve Trendler kilitli"
+  },
+  "blockedPlayables": {
+    "message": "Playables / Oyunlar kilitli"
+  },
+  "overlayBadge": {
+    "message": "Relax YouTube • Kilitli"
+  },
+  "overlayTitle": {
+    "message": "Odak Modu Aktif"
+  },
+  "overlayDesc": {
+    "message": "Ana sayfa, Shorts, arama, abonelikler ve keşfet akışları kalıcı olarak kapalıdır. Yalnızca doğrudan video bağlantıları açılır."
+  }
+}

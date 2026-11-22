@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,26 +13,27 @@
         <img src="icons/icon32.png" alt="Relax YouTube" class="logo" width="24" height="24" />
         <span class="title">Relax YouTube</span>
       </div>
-      <span class="status-badge">Kilitli &amp; Aktif</span>
+      <span class="status-badge" data-i18n="statusBadge">Locked &amp; Active</span>
     </header>
 
     <section class="section">
-      <h2 class="section-title">Sabit Korumalar</h2>
+      <h2 class="section-title" data-i18n="sectionTitle">Locked Protections</h2>
       <ul class="rules">
-        <li>Clean Mode (Yalnızca Video Oynatıcı)</li>
-        <li>Ana Sayfa Gizli &amp; Engelli</li>
-        <li>Shorts Sekmesi, Videolar &amp; Öneriler Engelli</li>
-        <li>Yorumlar &amp; İlgili Videolar Gizli</li>
-        <li>Keşfet, Trendler &amp; Abonelikler Gizli</li>
-        <li>Üst Çubuk, Arama &amp; Bildirimler Gizli</li>
-        <li>Otomatik Oynatma (Autoplay) Kapalı</li>
-        <li>Abone Ol, Beğeni, Canlı Sohbet, Playables &amp; Bitiş Kartları Gizli</li>
+        <li data-i18n="ruleCleanMode">Clean Mode (Video Player Only)</li>
+        <li data-i18n="ruleHome">Home Page Hidden &amp; Blocked</li>
+        <li data-i18n="ruleShorts">Shorts Tab, Videos &amp; Suggestions Blocked</li>
+        <li data-i18n="ruleComments">Comments &amp; Related Videos Hidden</li>
+        <li data-i18n="ruleDiscovery">Explore, Trending &amp; Subscriptions Hidden</li>
+        <li data-i18n="ruleHeader">Top Header, Search &amp; Notifications Hidden</li>
+        <li data-i18n="ruleAutoplay">Autoplay Permanently Disabled</li>
+        <li data-i18n="ruleClutter">Subscribe, Likes, Live Chat, Playables &amp; End Cards Hidden</li>
       </ul>
     </section>
 
-    <footer class="footer">
-      Kapatma tuşu ve ayar değiştirme devre dışıdır.
+    <footer class="footer" data-i18n="popupFooter">
+      Off switch and settings are permanently disabled.
     </footer>
   </main>
+  <script src="popup.js"></script>
 </body>
 </html>

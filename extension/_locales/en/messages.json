@@ -1,0 +1,62 @@
+{
+  "actionTitle": {
+    "message": "Relax YouTube — Locked & Active"
+  },
+  "statusBadge": {
+    "message": "Locked & Active"
+  },
+  "sectionTitle": {
+    "message": "Locked Protections"
+  },
+  "ruleCleanMode": {
+    "message": "Clean Mode (Video Player Only)"
+  },
+  "ruleHome": {
+    "message": "Home Page Hidden & Blocked"
+  },
+  "ruleShorts": {
+    "message": "Shorts Tab, Videos & Suggestions Blocked"
+  },
+  "ruleComments": {
+    "message": "Comments & Related Videos Hidden"
+  },
+  "ruleDiscovery": {
+    "message": "Explore, Trending & Subscriptions Hidden"
+  },
+  "ruleHeader": {
+    "message": "Top Header, Search & Notifications Hidden"
+  },
+  "ruleAutoplay": {
+    "message": "Autoplay Permanently Disabled"
+  },
+  "ruleClutter": {
+    "message": "Subscribe, Likes, Live Chat, Playables & End Cards Hidden"
+  },
+  "popupFooter": {
+    "message": "Off switch and settings are permanently disabled."
+  },
+  "blockedHome": {
+    "message": "Home feed is locked"
+  },
+  "blockedShorts": {
+    "message": "Shorts are locked"
+  },
+  "blockedSubscriptions": {
+    "message": "Subscriptions feed is locked"
+  },
+  "blockedDiscovery": {
+    "message": "Explore & Trending are locked"
+  },
+  "blockedPlayables": {
+    "message": "Playables & Gaming are locked"
+  },
+  "overlayBadge": {
+    "message": "Relax YouTube • Locked"
+  },
+  "overlayTitle": {
+    "message": "Focus Mode Active"
+  },
+  "overlayDesc": {
+    "message": "Home, Shorts, search, subscriptions, and discovery feeds are permanently locked. Only direct video links can be played."
+  }
+}

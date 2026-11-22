@@ -18,6 +18,20 @@
   const lastToggleAttempts = new WeakMap();
   const lastUnblockedHrefByDoc = new WeakMap();
 
+  function t(key, fallback) {
+    if (
+      typeof chrome !== "undefined" &&
+      chrome.i18n &&
+      typeof chrome.i18n.getMessage === "function"
+    ) {
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) {
+        return msg;
+      }
+    }
+    return fallback;
+  }
+
   function normalizePathname(pathname) {
     if (typeof pathname !== "string" || pathname.length === 0) {
       return "/";
@@ -37,21 +51,21 @@
     const path = normalizePathname(pathname);
 
     if (path === "/") {
-      return "Ana sayfa kilitli";
+      return t("blockedHome", "Home feed is locked");
     }
     if (matchesRoutePrefix(path, "/shorts")) {
-      return "Shorts kilitli";
+      return t("blockedShorts", "Shorts are locked");
     }
     if (matchesRoutePrefix(path, "/feed/subscriptions")) {
-      return "Abonelikler kilitli";
+      return t("blockedSubscriptions", "Subscriptions feed is locked");
     }
     for (let i = 0; i < DISCOVERY_PREFIXES.length; i += 1) {
       if (matchesRoutePrefix(path, DISCOVERY_PREFIXES[i])) {
-        return "Keşfet ve Trendler kilitli";
+        return t("blockedDiscovery", "Explore & Trending are locked");
       }
     }
     if (matchesRoutePrefix(path, "/playables") || matchesRoutePrefix(path, "/gaming")) {
-      return "Playables / Oyunlar kilitli";
+      return t("blockedPlayables", "Playables & Gaming are locked");
     }
     return null;
   }
@@ -86,11 +100,11 @@
 
     const badge = doc.createElement("div");
     badge.className = "relax-yt-badge";
-    badge.textContent = "Relax YouTube • Kilitli";
+    badge.textContent = t("overlayBadge", "Relax YouTube • Locked");
 
     const title = doc.createElement("h1");
     title.className = "relax-yt-title";
-    title.textContent = "Odak Modu Aktif";
+    title.textContent = t("overlayTitle", "Focus Mode Active");
 
     const reasonEl = doc.createElement("p");
     reasonEl.id = REASON_ID;
@@ -99,8 +113,10 @@
 
     const desc = doc.createElement("p");
     desc.className = "relax-yt-desc";
-    desc.textContent =
-      "Ana sayfa, Shorts, arama, abonelikler ve keşfet akışları kalıcı olarak kapalıdır. Yalnızca doğrudan video bağlantıları açılır.";
+    desc.textContent = t(
+      "overlayDesc",
+      "Home, Shorts, search, subscriptions, and discovery feeds are permanently locked. Only direct video links can be played."
+    );
 
     card.appendChild(badge);
     card.appendChild(title);

@@ -94,7 +94,8 @@ function findElementById(node, id) {
   assert.ok(manifest.name.length <= 45, "manifest.name must be <= 45 chars");
   assert.ok(manifest.short_name.length <= 12, "manifest.short_name must be <= 12 chars");
   assert.ok(manifest.description.length <= 132, "manifest.description must be <= 132 chars");
-  assert.ok(manifest.version, "manifest version must exist");
+  assert.equal(manifest.version, "1.1.0", "manifest version must be 1.1.0");
+  assert.equal(manifest.default_locale, "en", "default_locale must be en");
   assert.ok(!manifest.permissions || manifest.permissions.length === 0, "No extra permissions allowed");
   assert.equal(manifest.options_page, undefined, "options_page must not exist");
   assert.equal(manifest.options_ui, undefined, "options_ui must not exist");
@@ -107,6 +108,7 @@ function findElementById(node, id) {
     assert.equal(manifest.action?.default_icon?.[size], iconRel, `Action icon mismatch for ${size}`);
   }
 
+  assert.equal(manifest.action?.default_title, "__MSG_actionTitle__");
   assert.equal(manifest.action?.default_popup, "popup.html");
   assert.ok(Array.isArray(manifest.content_scripts) && manifest.content_scripts.length === 1);
   const cs = manifest.content_scripts[0];
@@ -128,14 +130,51 @@ assertPngDimensions("extension/icons/icon48.png", 48);
 assertPngDimensions("extension/icons/icon128.png", 128);
 assertPngDimensions("store-assets/logo-300x300.png", 300);
 
-// 3. Validate popup.html has zero interactive off-switches or scripts
+// 2b. Validate _locales/en and _locales/tr messages.json
+const enMessages = JSON.parse(readUtf8("extension/_locales/en/messages.json"));
+const trMessages = JSON.parse(readUtf8("extension/_locales/tr/messages.json"));
 {
-  const popupHtml = readUtf8("extension/popup.html").toLowerCase();
+  const enKeys = Object.keys(enMessages).sort();
+  const trKeys = Object.keys(trMessages).sort();
+  assert.ok(enKeys.length > 0, "_locales/en/messages.json must not be empty");
+  assert.deepEqual(trKeys, enKeys, "_locales/tr keys must exactly match _locales/en keys");
+  for (const key of enKeys) {
+    assert.equal(typeof enMessages[key]?.message, "string");
+    assert.ok(enMessages[key].message.trim().length > 0, `Empty en message for ${key}`);
+    assert.equal(typeof trMessages[key]?.message, "string");
+    assert.ok(trMessages[key].message.trim().length > 0, `Empty tr message for ${key}`);
+  }
+}
+
+// 3. Validate popup.html & popup.js have zero interactive off-switches or inline scripts
+{
+  const popupHtmlRaw = readUtf8("extension/popup.html");
+  const popupHtml = popupHtmlRaw.toLowerCase();
   assert.ok(!popupHtml.includes("<button"), "popup.html must not contain <button>");
   assert.ok(!popupHtml.includes("<input"), "popup.html must not contain <input>");
-  assert.ok(!popupHtml.includes("<script"), "popup.html must not contain <script>");
   assert.ok(!popupHtml.includes("onclick"), "popup.html must not contain onclick");
-  assert.ok(popupHtml.includes("kilitli"), "popup.html should show locked state");
+  const scriptMatches = [...popupHtmlRaw.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+  assert.equal(scriptMatches.length, 1, "popup.html must include only popup.js");
+  assert.ok(
+    /\bsrc=["']popup\.js["']/i.test(scriptMatches[0][1]),
+    "popup.html script tag must reference popup.js"
+  );
+  assert.equal(scriptMatches[0][2].trim(), "", "popup.html must not contain inline script code");
+  assert.ok(popupHtml.includes("locked"), "popup.html should show locked state");
+
+  const i18nMatches = [...popupHtmlRaw.matchAll(/data-i18n=["']([^"']+)["']/g)];
+  assert.ok(i18nMatches.length >= 10, "popup.html must tag translatable fields with data-i18n");
+  for (const m of i18nMatches) {
+    assert.ok(Object.hasOwn(enMessages, m[1]), `Unknown data-i18n key in popup.html: ${m[1]}`);
+  }
+
+  const popupJs = readUtf8("extension/popup.js");
+  assert.ok(!popupJs.includes("innerHTML"), "popup.js must not use innerHTML");
+  assert.ok(!popupJs.includes("outerHTML"), "popup.js must not use outerHTML");
+  assert.ok(!popupJs.includes("insertAdjacentHTML"), "popup.js must not use insertAdjacentHTML");
+  assert.ok(!popupJs.includes("addEventListener"), "popup.js must remain non-interactive");
+  assert.ok(!popupJs.includes("onclick"), "popup.js must not attach onclick");
+  execFileSync(process.execPath, ["--check", path.join(EXT_DIR, "popup.js")], { stdio: "pipe" });
 }
 
 // 4. Validate styles.css braces and required selectors
@@ -307,7 +346,7 @@ assertPngDimensions("store-assets/logo-300x300.png", 300);
     };
 
     const blockedRes = enforceRoute(mockDoc, mockWin);
-    assert.equal(blockedRes, "Shorts kilitli");
+    assert.equal(blockedRes, "Shorts are locked");
     assert.equal(rootEl.getAttribute(BLOCKED_ATTR), "true");
     assert.equal(mockVideo.paused, true);
     assert.equal(mockVideo.muted, true);
